@@ -11,4 +11,5 @@ alias ls="exa"
 alias gitreset="git reset HEAD~1"
 
 # Export variables
+# https://developer.1password.com/docs/ssh/agent/compatibility
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
