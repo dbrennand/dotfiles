@@ -8,6 +8,7 @@ eval "$(pyenv init -)"
 
 # Aliases
 alias ls="eza"
+alias hbu="brew update && brew upgrade && brew upgrade --cask --greedy && brew doctor"
 alias gitreset="git reset HEAD~1"
 
 # Export variables
