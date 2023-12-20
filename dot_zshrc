@@ -11,6 +11,7 @@ alias ls="eza"
 alias hbu="brew update && brew upgrade && brew upgrade --cask --greedy && brew doctor"
 alias gitreset="git reset HEAD~1"
 alias k="kubectl"
+alias phistory="history -p && rm ~/.zsh_history"
 
 # Export variables
 # https://developer.1password.com/docs/ssh/agent/compatibility
