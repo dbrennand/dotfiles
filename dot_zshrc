@@ -1,3 +1,8 @@
+# Kubectl completions
+autoload -Uz compinit
+compinit
+
+# Homebrew
 eval $(/opt/homebrew/bin/brew shellenv)
 eval "$(starship init zsh)"
 
@@ -13,6 +18,9 @@ alias gitreset="git reset HEAD~1"
 alias k="kubectl"
 alias phistory="history -p && rm ~/.zsh_history"
 alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
+
+# Enable completions for kubectl
+source <(k completion zsh)
 
 # Export variables
 # https://developer.1password.com/docs/ssh/agent/compatibility
