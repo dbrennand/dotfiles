@@ -4,6 +4,7 @@ compinit
 
 # Homebrew
 eval $(/opt/homebrew/bin/brew shellenv)
+# Starship
 eval "$(starship init zsh)"
 
 # Pyenv config
@@ -19,9 +20,10 @@ alias k="kubectl"
 alias phistory="history -p && rm ~/.zsh_history"
 alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
 
-# Enable completions for kubectl
+# Custom Sources
+## Enable completions for kubectl
 source <(k completion zsh)
 
 # Export variables
-# https://developer.1password.com/docs/ssh/agent/compatibility
+## https://developer.1password.com/docs/ssh/agent/compatibility
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
