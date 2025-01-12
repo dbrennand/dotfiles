@@ -8,11 +8,8 @@ eval $(/opt/homebrew/bin/brew shellenv)
 eval "$(starship init zsh)"
 # GitHub CLI
 eval "$(gh copilot alias -- zsh)"
-
-# Pyenv config
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# UV
+eval "$(uv generate-shell-completion zsh)"
 
 # Aliases
 alias ls="eza"
