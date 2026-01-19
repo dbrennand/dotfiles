@@ -1,36 +1,54 @@
-# Kubectl completions
-autoload -Uz compinit
-compinit
+# Managed at: https://github.com/dbrennand/dotfiles
+# Managed via chezmoi
+# https://www.chezmoi.io/
+
+# Starship shell
+# https://github.com/starship/starship
+eval "$(starship init zsh)"
 
 # Homebrew
+# https://brew.sh/
 eval $(/opt/homebrew/bin/brew shellenv)
-# Starship
-eval "$(starship init zsh)"
-# GitHub CLI
-eval "$(gh copilot alias -- zsh)"
-# UV
+
+# Shell completions
+## uv
+## https://docs.astral.sh/uv/getting-started/installation/#shell-autocompletion
 eval "$(uv generate-shell-completion zsh)"
 
-# Aliases
-alias ls="eza"
-alias hbu="brew update && brew upgrade && brew upgrade --cask --greedy && brew doctor"
-alias gitreset="git reset HEAD~1"
-alias k="kubectl"
-alias phistory="history -p && rm ~/.zsh_history"
-alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
-
-# Custom Sources
-## Enable completions for kubectl
-source <(k completion zsh)
 ## zsh-autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Export variables
+# Shell aliases
+## eza
+# https://github.com/eza-community/eza
+alias ls="eza"
+alias ll="eza"
+
+## Homebrew - update all packages and casks
+alias hbu="brew update && brew upgrade && brew upgrade --cask --greedy && brew doctor"
+
+## Git - Undo last commit but keep changes
+alias gitreset="git reset HEAD~1"
+
+## Kubectl alias
+alias k="kubectl"
+
+## Purge zsh shell history
+alias phistory="history -p && rm ~/.zsh_history"
+
+## Tailscale CLI on MacOS
+alias tailscale='/Applications/Tailscale.app/Contents/MacOS/Tailscale'
+
+# 1Password
+## 1Password SSH agent
 ## https://developer.1password.com/docs/ssh/agent/compatibility
 export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+## 1Password Shell plugins
 ## https://developer.1password.com/docs/cli/shell-plugins/test
 source $HOME/.config/op/plugins.sh
 
-# Custom keybinds
+# zsh custom keybinds
+## ALT + Right arrow to go forward one word
 bindkey "^[[1;3C" forward-word
+## ALT + Left arrow to go backward one word
 bindkey "^[[1;3D" backward-word
