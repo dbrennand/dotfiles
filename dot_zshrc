@@ -11,6 +11,9 @@ eval $(/opt/homebrew/bin/brew shellenv)
 eval "$(starship init zsh)"
 
 # Shell completions
+## https://stackoverflow.com/a/74323525
+autoload -Uz compinit
+compinit
 ## uv
 ## https://docs.astral.sh/uv/getting-started/installation/#shell-autocompletion
 eval "$(uv generate-shell-completion zsh)"
