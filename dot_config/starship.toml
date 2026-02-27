@@ -1,0 +1,19 @@
+format = """
+$time $directory
+$character
+"""
+
+[time]
+disabled = false
+format = "[$time]($style)"
+time_format = "%H:%M"
+style = "dimmed white"
+
+[directory]
+style = "white"
+truncation_length = 3
+truncate_to_repo = false
+
+[character]
+success_symbol = "[❯](white)"
+error_symbol = "[❯](red)"
