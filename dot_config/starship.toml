@@ -1,19 +1,29 @@
+# Prompt format: time + directory + git branch
 format = """
-$time $directory
+$time $directory $git_branch
 $character
 """
 
+# Show current time
 [time]
 disabled = false
 format = "[$time]($style)"
 time_format = "%H:%M"
 style = "dimmed white"
 
+# Show current directory
 [directory]
 style = "white"
 truncation_length = 3
 truncate_to_repo = false
 
+# Show git branch if in git repo
+[git_branch]
+disabled = false
+format = "[$branch]($style)"
+style = "cyan"
+
+# Prompt character
 [character]
 success_symbol = "[❯](white)"
 error_symbol = "[❯](red)"
