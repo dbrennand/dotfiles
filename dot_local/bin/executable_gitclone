@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+#
+# gitclone — clone a git repository into a tidy host/owner/repo tree under $HOME.
+#
+# Parses the host and path from a git URL (SSH or HTTP(S)) and clones the
+# repository into $HOME/<host>/<owner>/<repo>, creating any missing parent
+# directories. If the target directory already exists, the script warns and
+# exits without re-cloning.
+#
+# Usage:
+#   gitclone <git-url>
+#
+# Examples:
+#   gitclone git@github.com:dbrennand/home-ops.git
+#       -> $HOME/github.com/dbrennand/home-ops
+#
+#   gitclone https://github.com/dbrennand/home-ops.git
+#       -> $HOME/github.com/dbrennand/home-ops
+#
+#   gitclone git@gitlab.com:group/sub/proj.git
+#       -> $HOME/gitlab.com/group/sub/proj
+#
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "❌ Usage: gitclone <git-url>" >&2
+    exit 1
+fi
+
+url="$1"
+
+if [[ "$url" =~ ^git@([^:]+):(.+)$ ]]; then
+    host="${BASH_REMATCH[1]}"
+    path="${BASH_REMATCH[2]}"
+elif [[ "$url" =~ ^(https?|ssh|git)://([^/]+)/(.+)$ ]]; then
+    host="${BASH_REMATCH[2]}"
+    path="${BASH_REMATCH[3]}"
+    host="${host#*@}"
+else
+    echo "❌ Unrecognized git URL format: $url" >&2
+    exit 1
+fi
+
+path="${path%.git}"
+path="${path%/}"
+target="$HOME/$host/$path"
+
+if [[ -d "$target" ]]; then
+    echo "⚠️  Project already exists at: $target"
+    exit 0
+fi
+
+parent="$(dirname "$target")"
+echo "📁 Ensuring directory: $parent"
+mkdir -p "$parent"
+
+echo "🚀 Cloning $url into $target"
+git clone "$url" "$target"
+
+echo "✅ Cloned to: $target"
