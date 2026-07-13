@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "❌ Error: not inside a Git repository."
+  exit 1
+fi
+
+if ! git remote get-url upstream >/dev/null 2>&1; then
+  echo "❌ Error: no remote named 'upstream' exists."
+  exit 1
+fi
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo "⚠️ Error: working tree is not clean. Commit or stash your changes first."
+  exit 1
+fi
+
+echo "🔀 Switching to main..."
+git switch main
+
+echo "📥 Fetching latest changes from upstream/main..."
+git fetch upstream main
+
+echo "🔄 Updating local main..."
+git merge --no-edit upstream/main
+
+echo "🚀 Pushing updated main to origin..."
+git push origin main
+
+echo "✅ Fork successfully synced with upstream/main!"
+
